@@ -48,9 +48,9 @@ python pong.py
 ## Development Conventions
 
 ### Visual Standards
-- **Pixel Art:** Use Unicode Block Elements (`█`, `▀`, `▄`, `▌`) instead of standard ASCII characters for all game entities.
-- **No Emojis:** Maintain a pure 8-bit aesthetic by avoiding emojis in HUDs, menus, and gameplay.
-- **Shadow Headers:** Use the `draw_shadow_text` function for consistent, high-impact titles with Cyan or Red shadows.
+- **Pixel Art:** Use Unicode Block Elements (█, ▀, ▄, ▌) instead of standard ASCII characters for all game entities.
+- **Strict No-Emoji Mandate:** Emojis are strictly prohibited in all project files, including code, HUDs, menus, and documentation (README, etc.). Maintain a pure 8-bit aesthetic using only text and block characters.
+- **Shadow Headers:** Use the draw_shadow_text function for consistent, high-impact titles with Cyan or Red shadows.
 
 ### Coding Practices
 - **Performance:** Use `stdscr.timeout()` and `time.sleep()` to lock gameplay to a stable 60 FPS.

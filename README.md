@@ -1,36 +1,57 @@
-# 🦖 DinoCLI - 8-Bit Deluxe Edition
+# DinoCLI - 8-Bit Deluxe Arcade
 
-[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+```text
+ ██████╗ ██╗███╗   ██╗  ██████╗  ██████╗██╗     ██╗
+ ██╔══██╗██║████╗  ██║ ██╔═══██╗██╔════╝██║     ██║
+ ██║  ██║██║██╔██╗ ██║ ██║   ██║██║     ██║     ██║
+ ██║  ██║██║██║╚██╗██║ ██║   ██║██║     ██║     ██║
+ ██████╔╝██║██║ ╚████║ ╚██████╔╝╚██████╗███████╗██║
+ ╚═════╝ ╚═╝╚═╝  ╚═══╝  ╚═════╝  ╚═════╝╚══════╝╚═╝
+```
 
-A high-performance, terminal-based recreation of the classic Google Chrome "No Internet" Dinosaur Game. Built entirely in Python using the `curses` module, this version features a bold 8-bit aesthetic, smooth animations, and retro visual effects.
+Python-based 8-bit arcade suite for the terminal.
 
----
-
-## ✨ Features
-
-- **8-Bit Retro Graphics:** Custom-designed blocky ASCII art for the Dino, obstacles, and terrain.
-- **Dynamic Physics:** Gravity-based jumping logic with acceleration and velocity for a natural feel.
-- **Visual Effects:** 
-  - **Drop Shadows:** Layered 3D text effects for the logo and Game Over screens.
-  - **Parallax Background:** Scrolling terrain markers to simulate speed.
-- **Difficulty Scaling:** The game speed and spawn frequency increase as your score gets higher.
-- **High Score Tracking:** Keep track of your best run during each session.
-- **Cross-Platform Support:** Optimized for Linux, macOS, and Windows.
+A high-performance, terminal-based arcade suite featuring 8-bit recreations of classic games. Built entirely in Python using the curses module, this collection features a bold 8-bit aesthetic, Unicode block-element sprites, and layered drop-shadow visual effects.
 
 ---
 
-## 🎮 Controls
+## Included Games
+
+The suite currently features 7 classic arcade recreations:
+
+1.  Dino Run Pro (dino2.py): The definitive terminal dino experience with arcade physics.
+2.  Tetris Block (tetris.py): Full-featured Tetris with rotation and line clearing.
+3.  Space Invaders (invaders.py): Defend Earth from waves of 8-bit aliens.
+4.  Pong Classic (pong.py): Smooth, fast-paced table tennis for two players.
+5.  Snake Pro (snake.py): High-precision snake growth and survival.
+6.  Breakout Brick (breakout.py): Shatter colorful brick walls with arcade physics.
+7.  Frogger Cross (frogger.py): Dodge traffic and level up by reaching the goal.
+
+---
+
+## Signature 8-Bit Style
+
+- Unicode Block Graphics: Every sprite is designed using █, ▀, ▄, and ▌ characters to simulate authentic retro pixels.
+- Arcade Refresh Rate: Locked 60 FPS (15 FPS for Snake) ensures zero flickering and buttery smooth movement.
+- Drop Shadow HUDs: High-impact headers with Cyan and Red shadows for that premium Deluxe feel.
+- Variable Physics: Snappy jumping, acceleration, and collision detection tuned for terminal responsiveness.
+- Pure Text Aesthetic: No emojis allowed. Strictly block art and text.
+
+---
+
+## Global Controls
 
 | Key | Action |
 | :--- | :--- |
-| `SPACE` or `UP` | **Jump** |
-| `R` | **Restart** (after Game Over) |
-| `Q` | **Quit** |
+| ARROWS | Movement / Navigation |
+| SPACE | Jump / Shoot / Action |
+| ENTER | Select Game (in Arcade) |
+| R | Restart (after Game Over) |
+| Q | Quit / Back to Menu |
 
 ---
 
-## 🚀 Installation & Running
+## Installation and Running
 
 ### 1. Clone the repository
 ```bash
@@ -39,31 +60,31 @@ cd DinoCLI
 ```
 
 ### 2. Install Dependencies
-The game uses the standard `curses` library. On **Windows**, you'll need to install the support package:
+The game uses the standard curses library. On Windows, you will need the support package:
 ```bash
 pip install windows-curses
 ```
 
-### 3. Play the Game
-Ensure your terminal is expanded to at least **85x26** for the best visual experience:
+### 3. Launch the Arcade
+Ensure your terminal is expanded (recommended 100x30) for the best visual experience:
 ```bash
-python dino.py
+python arcade.py
 ```
 
 ---
 
-## 🛠️ Technical Details
+## Technical Details
 
-- **Rendering Engine:** Built on the Python `curses` module for flicker-free, non-blocking terminal input and output.
-- **Hitbox Logic:** Pixel-perfect (character-based) collision detection with tightened bounding boxes for fair gameplay.
-- **Game Loop:** A robust 45 FPS loop ensures smooth character movement and responsive controls.
-
----
-
-## 📜 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
+- Rendering: Optimized curses loops with stdscr.timeout() for frame-rate limiting.
+- Launcher: arcade.py manages terminal states and subprocess execution for seamless game transitions.
+- Hitboxes: Pixel-perfect bounding box collision logic implemented in character space.
 
 ---
 
-**Happy Jumping!** 🦖💨
+## License
+
+Distributed under the MIT License. See LICENSE for more information.
+
+---
+
+**Insert Coin to Begin!**
