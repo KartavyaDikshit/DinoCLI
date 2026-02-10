@@ -12,6 +12,8 @@ import curses
 import subprocess
 import os
 import time
+import sys
+import shutil
 
 # --- 8-BIT ARCADE HEADER ---
 ARCADE_LOGO = [
@@ -20,7 +22,7 @@ ARCADE_LOGO = [
     r"███████║██████╔╝██║      ███████║██║  ██║█████╗  ",
     r"██╔══██║██╔══██╗██║      ██╔══██║██║  ██║██╔══╝  ",
     r"██║  ██║██║  ██║╚██████╗ ██║  ██║██████╔╝███████╗",
-    r"╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝"
+    r"╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝",
 ]
 
 GAMES = [
@@ -30,25 +32,44 @@ GAMES = [
     {"name": "PONG CLASSIC", "file": "pong.py"},
     {"name": "SNAKE PRO", "file": "snake.py"},
     {"name": "BREAKOUT BRICK", "file": "breakout.py"},
-    {"name": "FROGGER CROSS", "file": "frogger.py"}
+    {"name": "FROGGER CROSS", "file": "frogger.py"},
 ]
+
+
+def get_python_executable():
+    """Detect the correct Python executable for cross-platform compatibility."""
+    # First, try using the same executable that's running this script
+    current_python = sys.executable
+    if current_python and os.path.isfile(current_python):
+        return current_python
+
+    # Fallback to checking common Python executables
+    for python_cmd in ["python3", "python", "py"]:
+        if shutil.which(python_cmd):
+            return python_cmd
+
+    # If all else fails, use the current interpreter
+    return sys.executable
+
 
 def draw_shadow_text(stdscr, y, x, lines, color_pair, shadow_pair):
     for i, line in enumerate(lines):
         try:
             stdscr.addstr(y + i + 1, x + 1, line, curses.color_pair(shadow_pair))
             stdscr.addstr(y + i, x, line, curses.color_pair(color_pair) | curses.A_BOLD)
-        except: pass
+        except:
+            pass
+
 
 def main(stdscr):
     # Setup Colors
     curses.curs_set(0)
-    stdscr.nodelay(False) 
+    stdscr.nodelay(False)
     curses.start_color()
-    curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)  
-    curses.init_pair(2, curses.COLOR_CYAN, curses.COLOR_BLACK)   
-    curses.init_pair(3, curses.COLOR_GREEN, curses.COLOR_BLACK)  
-    curses.init_pair(4, curses.COLOR_YELLOW, curses.COLOR_BLACK) 
+    curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLACK)
+    curses.init_pair(2, curses.COLOR_CYAN, curses.COLOR_BLACK)
+    curses.init_pair(3, curses.COLOR_GREEN, curses.COLOR_BLACK)
+    curses.init_pair(4, curses.COLOR_YELLOW, curses.COLOR_BLACK)
 
     current_row = 0
 
@@ -65,7 +86,7 @@ def main(stdscr):
         for idx, game in enumerate(GAMES):
             x = (sw - 30) // 2
             y = menu_y + (idx * 3)
-            
+
             if idx == current_row:
                 stdscr.attron(curses.color_pair(3) | curses.A_BOLD)
                 stdscr.addstr(y, x, f" > [ {game['name']} ] < ")
@@ -85,26 +106,32 @@ def main(stdscr):
             current_row -= 1
         elif key == curses.KEY_DOWN and current_row < len(GAMES) - 1:
             current_row += 1
-        elif key in [ord('\n'), curses.KEY_ENTER, 10, 13]:
+        elif key in [ord("\n"), curses.KEY_ENTER, 10, 13]:
             # Launch Game
-            game_file = GAMES[current_row]['file']
+            game_file = GAMES[current_row]["file"]
             if os.path.exists(game_file):
                 # Properly exit curses mode before launching subprocess
                 curses.endwin()
-                
-                # Execute the game as a separate process
-                # Using 'python' as identified previously as the working command
-                subprocess.run(["python", game_file])
-                
+
+                # Execute the game as a separate process using the correct Python executable
+                python_cmd = get_python_executable()
+                subprocess.run([python_cmd, game_file])
+
                 # Re-initialize the terminal/screen after game exits
                 stdscr.clear()
                 stdscr.refresh()
             else:
-                stdscr.addstr(sh-2, (sw-20)//2, f"FILE {game_file} NOT FOUND!", curses.color_pair(2))
+                stdscr.addstr(
+                    sh - 2,
+                    (sw - 20) // 2,
+                    f"FILE {game_file} NOT FOUND!",
+                    curses.color_pair(2),
+                )
                 stdscr.refresh()
                 time.sleep(1)
-        elif key in [ord('q'), ord('Q')]:
+        elif key in [ord("q"), ord("Q")]:
             break
+
 
 if __name__ == "__main__":
     curses.wrapper(main)
