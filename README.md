@@ -60,7 +60,10 @@ cd DinoCLI
 ```
 
 ### 2. Install Dependencies
-The game uses the standard curses library. On Windows, you will need the support package:
+
+**Linux/macOS:** No additional dependencies required. The curses library is included with Python.
+
+**Windows:** You'll need the Windows curses support package:
 ```bash
 pip install windows-curses
 ```

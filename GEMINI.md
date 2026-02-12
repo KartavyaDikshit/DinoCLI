@@ -5,7 +5,7 @@ DinoCLI is a collection of high-fidelity, terminal-based recreations of classic 
 
 ### Main Technologies
 - **Language:** Python 3.x
-- **Graphics & Input:** `curses` (standard library, with `windows-curses` for Windows compatibility)
+- **Graphics & Input:** `curses` (standard library on Linux/macOS, requires `windows-curses` package on Windows)
 - **Process Management:** `subprocess` (used by the arcade launcher to manage game transitions)
 
 ### Architecture
@@ -23,6 +23,7 @@ DinoCLI is a collection of high-fidelity, terminal-based recreations of classic 
 
 ### Prerequisites
 - Python 3.8 or higher.
+- **Linux/macOS:** No additional dependencies required.
 - **Windows Users:** Must install the curses support package:
   ```bash
   pip install windows-curses
